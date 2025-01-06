@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:endpoint id="wsRecebeRastreamento" implementor="br.com.crearesistemas.iam.rastreamento.recebe.WSRecebeRastreamentoImpl" address="/WSRecebeRastreamento" />
+
+	<jaxws:endpoint id="wsEnviaMensagem" implementor="br.com.crearesistemas.iam.mensagem.envia.WSEnviaMensagemImpl" address="/WSEnviaMensagem" />
+	<jaxws:endpoint id="wsRecebeMensagem" implementor="br.com.crearesistemas.iam.mensagem.recebe.WSRecebeMensagemImpl" address="/WSRecebeMensagem" />
+
+	<jaxws:endpoint id="wsRecebeEquipamento" implementor="br.com.crearesistemas.iam.equipamento.recebe.WSRecebeEquipamentoImpl" address="/WSRecebeEquipamento" />
+
+	<jaxws:endpoint id="wsCadastroRotograma" implementor="br.com.crearesistemas.iam.rotograma.cadastra.WSCadastraRotogramaImpl" address="/WSCadastraRotograma" />
+	<jaxws:endpoint id="wsEmbarcaRotograma" implementor="br.com.crearesistemas.iam.rotograma.embarca.WSEmbarcaRotogramaImpl" address="/WSEmbarcaRotograma" />
+
+	<jaxws:endpoint id="wsSincronizaCercasDestino" implementor="br.com.crearesistemas.iam.cerca.sincroniza.WSSincronizaCercasDestinoImpl" address="/WSSincronizaCercasDestino" />
+
+	<jaxws:endpoint id="wsRecebeInfracao" implementor="br.com.crearesistemas.iam.infracao.recebe.WSRecebeInfracaoImpl" address="/WSRecebeInfracao" />
+
+	<jaxws:endpoint id="wsEnviaKeepAliveRastreamento" implementor="br.com.crearesistemas.iam.rastreamento.envia.WSEnviaKeepAliveRastreamentoImpl" address="/WSEnviaKeepAliveRastreamento" />
+	
+	<jaxws:endpoint id="wsRecebeApontamento" implementor="br.com.crearesistemas.iam.apontamento.recebe.WSRecebeApontamentoImpl" address="/WSRecebeApontamento" />
+	
+	<jaxws:endpoint id="wsRecebeProjetos" implementor="br.com.crearesistemas.pcct.wsrecebeprojetos.WSRecebeProjetosImpl" address="/PCCT/WSRecebeProjetos" />
+	
+	<jaxws:endpoint id="wsRecebeGruasFlorestais" implementor="br.com.crearesistemas.pcct.wsrecebegruasflorestais.WSRecebeGruasFlorestaisImpl" address="/PCCT/WSRecebeGruasFlorestais" />
+	
+	<jaxws:endpoint id="wsRecebePrevisoes" implementor="br.com.crearesistemas.pcct.wsrecebeprevisoes.WSRecebePrevisoesImpl" address="/PCCT/WSRecebePrevisoes" />
+	
+	<jaxws:endpoint id="wsRecebeCaminhoesTransporte" implementor="br.com.crearesistemas.pcct.wsrecebecaminhoestransporte.WSRecebeCaminhoesTransporteImpl" address="/PCCT/WSRecebeCaminhoesTransporte" />
+	
+	<jaxws:endpoint id="wsRecebeAcompnhamentoTransporte" implementor="br.com.crearesistemas.pcct.wsrecebeacompanhamentotransporte.WSRecebeAcompanhamentoTransporteImpl" address="/PCCT/WSRecebeAcompanhamentoTransporte" />
+	
+	<jaxws:endpoint id="wsRecebeGruasSiteIndustrial" implementor="br.com.crearesistemas.pcsi.wsrecebegruassiteindustrial.WSRecebeGruasSiteIndustrialImpl" address="/PCSI/WSRecebeGruasSiteIndustrial" />
+	
+	<jaxws:endpoint id="wsRecebeCaminhoesSiteIndustrial" implementor="br.com.crearesistemas.pcsi.wsrecebecaminhoessiteindustrial.WSRecebeCaminhoesSiteIndustrialImpl" address="/PCSI/WSRecebeCaminhoesSiteIndustrial" />
+	
+	<jaxws:endpoint id="wsRecebeTemposMediosCicloInterno" implementor="br.com.crearesistemas.pcsi.wsrecebetemposmediosciclointerno.WSRecebeTemposMediosCicloInternoImpl" address="/PCSI/WSRecebeTemposMediosCicloInterno" />
+	
+	<jaxws:endpoint id="wsRecebeGruasSiteIndustrialL1" implementor="br.com.crearesistemas.pcsil1.wsrecebegruassiteindustrial.WSRecebeGruasSiteIndustrialImpl" address="/PCSIL1/WSRecebeGruasSiteIndustrial" />
+	
+	<jaxws:endpoint id="wsRecebeCaminhoesSiteIndustrialL1" implementor="br.com.crearesistemas.pcsil1.wsrecebecaminhoessiteindustrial.WSRecebeCaminhoesSiteIndustrialImpl" address="/PCSIL1/WSRecebeCaminhoesSiteIndustrial" />
+	
+	<jaxws:endpoint id="wsRecebeTemposMediosCicloInternoL1" implementor="br.com.crearesistemas.pcsil1.wsrecebetemposmediosciclointerno.WSRecebeTemposMediosCicloInternoImpl" address="/PCSIL1/WSRecebeTemposMediosCicloInterno" />
+	
+	<jaxws:endpoint id="wsRecebePartidas" implementor="br.com.crearesistemas.pcct.wsrecebepartidas.WSRecebePartidasImpl" address="/PCCT/WSRecebePartidas" />
+	
+	<jaxws:endpoint id="wsRecebeChegadas" implementor="br.com.crearesistemas.pcct.wsrecebechegadas.WSRecebeChegadasImpl" address="/PCCT/WSRecebeChegadas" />
+	
+	<jaxws:endpoint id="wsRecebeIndisponiveis" implementor="br.com.crearesistemas.pcsi.wsrecebeindisponiveis.WSRecebeImplementosIndisponiveisImpl" address="/PCSI/WSRecebeImplementosIndisponiveis" />
+	
+	
+</beans>

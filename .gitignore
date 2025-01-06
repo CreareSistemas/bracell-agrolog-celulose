@@ -1,0 +1,11 @@
+/.metadata/
+/target/
+.classpath
+.project
+deploy-prod.bat
+.settings
+src/test
+*Teste.java
+src/main/webapp/META-INF/context-vagrant-hom.xml
+src/main/webapp/META-INF/context-producao.xml
+src/main/webapp/META-INF/context-homologacao.xml

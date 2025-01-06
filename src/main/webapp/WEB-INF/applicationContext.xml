@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:ws="http://jax-ws.dev.java.net/spring/core" xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd http://jax-ws.dev.java.net/spring/core http://jax-ws.java.net/spring/core.xsd http://jax-ws.dev.java.net/spring/servlet http://jax-ws.java.net/spring/servlet.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="br.com.crearesistemas" />
+
+	<import resource="ws-context.xml" />
+
+	<!-- ~~~~~~~~~ Quartz Job ~~~~~~~~~~ -->
+	<bean id="jobApontamentos" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	  <property name="jobClass" value="br.com.crearesistemas.job.ApontamentosJob"/>
+	  <property name="durability" value="true"/>
+	</bean>
+	<bean id="jobDados" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	  <property name="jobClass" value="br.com.crearesistemas.job.DadosMestresJob"/>
+	  <property name="durability" value="true"/>
+	</bean>
+	<bean id="jobParadas" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	  <property name="jobClass" value="br.com.crearesistemas.job.ParadasJob"/>
+	  <property name="durability" value="true"/>
+	</bean>
+	<bean id="jobAptPendentes" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	  <property name="jobClass" value="br.com.crearesistemas.job.ApontamentosNaoTratadosJob"/>
+	  <property name="durability" value="true"/>
+	</bean>
+	
+	<!-- ~~~~~~~~~~~ Cron Trigger, run every X seconds ~~~~~~~~~~~~~ -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="jobApontamentos" />
+	  <!-- executa a cada 30 seg multithread: 0/30 * * * * ?  -->
+	  <property name="cronExpression" value="0/30 * * * * ?" />
+	</bean>
+	<bean id="cronTriggerDados" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="jobDados" />
+	  <!-- executa a cada 30 min multithread: 0 0/30 * * * ?  -->
+	  <property name="cronExpression" value="0 0/30 * * * ?" />
+	</bean>
+	<bean id="cronTriggerFabrica" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="jobParadas" />
+	  <!-- executa a cada 30 segundoss: 0/10 * * * * ?  -->
+	  <property name="cronExpression" value="0/30 * * * * ?" />
+	</bean>
+	<bean id="cronTriggerPendencia" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	  <property name="jobDetail" ref="jobAptPendentes" />
+	  <!-- executa a cada 30 segundos: 0/10 * * * * ?  -->
+	  <property name="cronExpression" value="0/30 * * * * ?" />
+	</bean>
+	
+	<!-- ~~~~~~~~~~~~~~~~  Scheduler bean Factory   ~~~~~~~~~~~~~~~~ -->
+	<bean id="schedulerA" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory">
+            <bean class="br.com.crearesistemas.job.config.AutowiringSpringBeanJobFactory" />
+    	</property>
+        <property name="configLocation" value="classpath:quartz.properties" />
+         <property name="jobDetails">
+		  <list>
+		    <ref bean="jobApontamentos" />
+		  </list>
+		 </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="schedulerB" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory">
+            <bean class="br.com.crearesistemas.job.config.AutowiringSpringBeanJobFactory" />
+    	</property>
+        <property name="configLocation" value="classpath:quartz.properties" />
+         <property name="jobDetails">
+		  <list>
+		    <ref bean="jobDados" />
+		  </list>
+		 </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTriggerDados"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="schedulerC" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory">
+            <bean class="br.com.crearesistemas.job.config.AutowiringSpringBeanJobFactory" />
+    	</property>
+        <property name="configLocation" value="classpath:quartz.properties" />
+         <property name="jobDetails">
+		  <list>
+		    <ref bean="jobParadas" />
+		  </list>
+		 </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTriggerFabrica"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="schedulerD" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory">
+            <bean class="br.com.crearesistemas.job.config.AutowiringSpringBeanJobFactory" />
+    	</property>
+        <property name="configLocation" value="classpath:quartz.properties" />
+         <property name="jobDetails">
+		  <list>
+		    <ref bean="jobAptPendentes" />
+		  </list>
+		 </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTriggerPendencia"/>
+            </list>
+        </property>
+    </bean>
+</beans>
